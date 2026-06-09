@@ -1,0 +1,236 @@
+:root {
+    --negro-fondo: #0a0a0a;
+    --negro-panel: #141414;
+    --gris-card: #181818;
+    --oro-principal: #d4af37;
+    --oro-brillante: #f7e7a5;
+    --oro-profundo: #aa841b;
+    --blanco: #ffffff;
+    --gris-texto: #b5b5b5;
+    --rojo-corporativo: #ff1744;
+    --fuente-elegante: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fuente-elegante);
+}
+
+html { scroll-behavior: smooth; }
+body { background-color: var(--negro-fondo); color: var(--blanco); overflow-x: hidden; }
+
+/* Barra superior */
+.top-bar { background-color: #000; border-bottom: 1px solid #1a1a1a; padding: 10px 5%; font-size: 0.85rem; color: var(--gris-texto); }
+.top-bar-container { display: flex; justify-content: space-between; }
+.top-bar-container span { display: flex; align-items: center; gap: 6px; }
+.top-bar-container i { font-size: 1.1rem; color: var(--oro-principal); }
+
+/* Header Fijo */
+header {
+    background-color: rgba(20, 20, 20, 0.95);
+    border-bottom: 2px solid var(--oro-principal);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.logo-text { font-size: 2rem; font-weight: 800; color: var(--oro-principal); letter-spacing: 3px; line-height: 0.9; }
+.logo-subtext { font-size: 0.7rem; color: var(--blanco); letter-spacing: 4.5px; margin-top: 4px; }
+nav { display: flex; align-items: center; gap: 25px; }
+nav a { color: var(--gris-texto); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+nav a:hover { color: var(--oro-principal); }
+
+/* Botones */
+.btn-gold { background: linear-gradient(135deg, var(--oro-principal), var(--oro-profundo)); color: #000; border: none; padding: 11px 24px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: all 0.3s ease; }
+.btn-gold:hover { background: linear-gradient(135deg, var(--oro-brillante), var(--oro-principal)); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+.btn-outline { background: transparent; color: var(--oro-principal); border: 1px solid var(--oro-principal); padding: 11px 24px; font-weight: bold; text-decoration: none; transition: background 0.3s; }
+.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
+
+/* Hero */
+.hero { position: relative; background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.9)); }
+.hero-content { position: relative; z-index: 10; max-width: 850px; }
+.hero-content h2 { font-size: 3rem; font-weight: 700; margin-bottom: 15px; }
+.hero-content h2 span { color: var(--oro-principal); }
+.hero-content p { font-size: 1.1rem; color: var(--gris-texto); margin-bottom: 30px; }
+.hero-buttons { display: flex; justify-content: center; gap: 15px; }
+
+/* Contadores */
+.counters-section { display: flex; justify-content: space-around; background-color: #111; padding: 30px 5%; border-bottom: 1px solid #222; text-align: center; flex-wrap: wrap; gap: 20px; }
+.counter-box h3 { font-size: 2.5rem; color: var(--oro-principal); }
+.counter-box p { font-size: 0.9rem; color: var(--gris-texto); text-transform: uppercase; }
+
+/* Secciones Dinámicas */
+.portafolio-bloque { padding: 60px 5%; }
+.bg-alterno { background-color: var(--negro-panel); }
+.section-title { text-align: center; margin-bottom: 40px; }
+.section-title span { color: var(--oro-principal); font-size: 0.85rem; letter-spacing: 3px; font-weight: bold; }
+.section-title h2 { font-size: 2.2rem; margin-top: 5px; }
+.divider-gold { width: 80px; height: 2px; background-color: var(--oro-principal); margin: 15px auto 0; }
+
+/* Grilla Dinámica Premium */
+.grid-propiedades { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+
+/* Contenedor de Foto y Efectos Visuales */
+.tarjeta { 
+    background-color: var(--gris-card); 
+    border: 1px solid #222; 
+    position: relative; 
+    overflow: hidden; 
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s; 
+}
+.tarjeta:hover { 
+    transform: translateY(-8px); 
+    border-color: var(--oro-principal); 
+    box-shadow: 0 12px 24px rgba(214, 175, 55, 0.15);
+}
+
+.tarjeta-img-container {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+}
+
+.tarjeta-img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.tarjeta:hover .tarjeta-img { 
+    transform: scale(1.08); 
+}
+
+.tarjeta-badge { position: absolute; top: 15px; left: 15px; background-color: rgba(0,0,0,0.9); color: var(--oro-principal); border: 1px solid var(--oro-principal); padding: 6px 14px; font-size: 0.75rem; font-weight: bold; z-index: 5; }
+
+/* Botón Flotante de WhatsApp en la imagen */
+.whatsapp-float-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: #25d366;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+    transition: transform 0.3s elements, background-color 0.3s;
+}
+.whatsapp-float-badge:hover {
+    transform: scale(1.15);
+    background-color: #128c7e;
+}
+
+.tarjeta-info { padding: 22px; }
+.tarjeta-info h3 { font-size: 1.25rem; margin-bottom: 12px; transition: color 0.3s; }
+.tarjeta:hover .tarjeta-info h3 { color: var(--oro-principal); }
+.tarjeta-lugar { color: var(--gris-texto); font-size: 0.95rem; display: flex; align-items: center; gap: 6px; margin-bottom: 15px; }
+.tarjeta-precio { color: var(--oro-principal); font-size: 1.4rem; font-weight: 700; }
+
+/* Panel Administrativo */
+.admin-panel { background-color: var(--negro-panel); border: 1px dashed var(--oro-principal); padding: 30px; margin: 30px 5% 0; }
+.admin-panel h2 { color: var(--oro-principal); display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+.admin-instruction { color: var(--gris-texto); font-size: 0.9rem; margin-bottom: 25px; }
+#propiedad-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-size: 0.85rem; color: var(--oro-principal); }
+.form-group input, .form-group select { background-color: var(--negro-fondo); border: 1px solid #333; padding: 12px; color: #fff; }
+.form-buttons { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 15px; }
+.btn-cancel { background: #333; color: #fff; border: none; padding: 12px 25px; cursor: pointer; font-weight: bold; }
+
+.admin-actions { display: flex; gap: 10px; margin-top: 20px; border-top: 1px solid #2a2a2a; padding-top: 15px; }
+.btn-edit, .btn-delete { flex: 1; padding: 10px; border: none; cursor: pointer; font-weight: bold; }
+.btn-edit { background-color: #444; color: #fff; }
+.btn-delete { background-color: #601212; color: #fff; }
+
+/* Ventana Emergente (Modal Lead) */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-box {
+    background-color: var(--blanco);
+    color: #333;
+    width: 100%;
+    max-width: 550px;
+    padding: 45px 40px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: none; border: none;
+    font-size: 2rem; color: #999;
+    cursor: pointer;
+}
+.modal-close:hover { color: #000; }
+
+.modal-header h3 { font-size: 1.6rem; font-weight: 700; color: #111; margin-bottom: 5px; text-transform: uppercase; }
+.modal-header p { font-size: 1rem; margin-bottom: 30px; font-weight: 600; }
+.gold-text { color: var(--oro-profundo); }
+
+.modal-field { margin-bottom: 16px; }
+.modal-field input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s;
+}
+.modal-field input:focus { border-color: #111; }
+
+.modal-privacy { display: flex; align-items: flex-start; gap: 8px; text-align: left; margin: 20px 0; font-size: 0.85rem; color: #666; }
+.modal-privacy input { margin-top: 3px; }
+
+.btn-submit-lead {
+    background-color: var(--rojo-corporativo);
+    color: var(--blanco);
+    border: none;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-submit-lead:hover { background-color: #d50000; }
+
+/* Footer */
+footer { background-color: var(--negro-panel); border-top: 2px solid var(--oro-principal); padding: 40px 5% 20px; }
+.footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-bottom: 20px; }
+.footer-info h4, .footer-links h4 { color: var(--oro-principal); margin-bottom: 15px; }
+.footer-info p { margin-bottom: 10px; color: var(--gris-texto); display: flex; align-items: center; gap: 10px; }
+.footer-info .slogan { font-style: italic; color: var(--blanco); }
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: var(--gris-texto); text-decoration: none; }
+.footer-bottom { text-align: center; border-top: 1px solid #222; padding-top: 20px; font-size: 0.85rem; color: var(--gris-texto); }
+
+.hidden { display: none !important; }

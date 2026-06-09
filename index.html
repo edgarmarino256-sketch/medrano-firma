@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medrano Firma Inmobiliaria S.A.C | Proyectos Exclusivos</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span><i class="material-icons">phone</i> WhatsApp: +51 982 716 628</span>
+            <span><i class="material-icons">business</i> Sede Central: Lima, Perú</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container" onclick="window.scrollTo(0,0)">
+            <div class="logo-text">MEDRANO</div>
+            <div class="logo-subtext">FIRMA INMOBILIARIA</div>
+        </div>
+        <nav>
+            <a href="#seccion-terrenos">Terrenos</a>
+            <a href="#seccion-departamentos">Departamentos</a>
+            <a href="#seccion-locales">Locales Comerciales</a>
+            <button id="btn-admin-toggle" class="btn-gold" onclick="autenticarAdmin()">Acceso Interno</button>
+        </nav>
+    </header>
+
+    <section id="admin-panel" class="admin-panel hidden">
+        <h2><i class="material-icons">lock</i> Panel de Control de Inventario (Modo Administrador)</h2>
+        <p class="admin-instruction">Agrega o edita propiedades. Se colocarán automáticamente en su espacio correspondiente.</p>
+        
+        <form id="propiedad-form" onsubmit="guardarPropiedad(event)">
+            <input type="hidden" id="propiedad-id">
+            
+            <div class="form-group">
+                <label for="tipo">Espacio / Categoría Destino:</label>
+                <select id="tipo" required>
+                    <option value="terreno">Venta de Terreno</option>
+                    <option value="apartamento">Alquiler de Apartamento / Dpto</option>
+                    <option value="local">Alquiler de Local Comercial</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="titulo">Nombre del Proyecto / Inmueble:</label>
+                <input type="text" id="titulo" placeholder="Ej: Edificio Medrano Premium" required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio / Desde:</label>
+                <input type="text" id="precio" placeholder="Ej: $145,000 o S/. 2,200/mes" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ubicacion">Distrito / Zona:</label>
+                <input type="text" id="ubicacion" placeholder="Ej: Villa el Salvador, Lima Sur" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">URL de la Imagen Principal:</label>
+                <input type="url" id="imagen" placeholder="https://images.unsplash.com/..." required>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-gold" id="btn-form-submit">Publicar Inmueble</button>
+                <button type="button" class="btn-cancel" onclick="cerrarSesionAdmin()">Cerrar Gestión</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>El estilo de vida que buscas, <br><span>con el respaldo legal que necesitas.</span></h2>
+            <p>Descubre nuestros portafolios distribuidos estratégicamente en Lima y Regiones.</p>
+            <div class="hero-buttons">
+                <a href="#seccion-terrenos" class="btn-gold">Ver Terrenos</a>
+                <a href="#seccion-departamentos" class="btn-outline">Ver Departamentos</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="counters-section">
+        <div class="counter-box">
+            <h3>+150</h3>
+            <p>Inmuebles Entregados</p>
+        </div>
+        <div class="counter-box">
+            <h3>100%</h3>
+            <p>Respaldo Legal Asegurado</p>
+        </div>
+        <div class="counter-box">
+            <h3>+4</h3>
+            <p>Regiones con Cobertura Activa</p>
+        </div>
+    </section>
+
+    <section id="seccion-terrenos" class="portafolio-bloque">
+        <div class="section-title">
+            <span>INVERSIÓN Y FUTURO</span>
+            <h2>Nuestros Terrenos Destacados</h2>
+            <div class="divider-gold"></div>
+        </div>
+        <div id="contenedor-terrenos" class="grid-propiedades"></div>
+    </section>
+
+    <section id="seccion-departamentos" class="portafolio-bloque bg-alterno">
+        <div class="section-title">
+            <span>EXCLUSIVIDAD RESIDENCIAL</span>
+            <h2>Departamentos en Alquiler</h2>
+            <div class="divider-gold"></div>
+        </div>
+        <div id="contenedor-departamentos" class="grid-propiedades"></div>
+    </section>
+
+    <section id="seccion-locales" class="portafolio-bloque">
+        <div class="section-title">
+            <span>DESARROLLO COMERCIAL</span>
+            <h2>Locales Comerciales Disponibles</h2>
+            <div class="divider-gold"></div>
+        </div>
+        <div id="contenedor-locales" class="grid-propiedades"></div>
+    </section>
+
+    <div id="modal-lead" class="modal-overlay hidden">
+        <div class="modal-box">
+            <button class="modal-close" onclick="cerrarModal()">&times;</button>
+            <div class="modal-header">
+                <h3>Solicitar Información Premium</h3>
+                <p id="modal-propiedad-titulo" class="gold-text">Proyecto Inmobiliario</p>
+            </div>
+            <form id="form-cliente" onsubmit="enviarLead(event)">
+                <div class="modal-field">
+                    <input type="text" id="lead-nombre" placeholder="Ingresar nombre completo" required>
+                </div>
+                <div class="modal-field">
+                    <input type="email" id="lead-email" placeholder="Ingresar email" required>
+                </div>
+                <div class="modal-field">
+                    <input type="tel" id="lead-telefono" placeholder="Ingresar teléfono de contacto" required>
+                </div>
+                <div class="modal-privacy">
+                    <input type="checkbox" id="privacy-check" required>
+                    <label for="privacy-check">Acepto los términos y políticas de tratamiento de datos.</label>
+                </div>
+                <button type="submit" class="btn-submit-lead">QUIERO INFORMACIÓN</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h4>MEDRANO FIRMA INMOBILIARIA S.A.C</h4>
+                <p class="slogan">"Confianza y Respaldo legal para tu inversión"</p>
+                <p><i class="material-icons">location_on</i> Oficina Principal: Lima, Perú</p>
+                <p><i class="material-icons">phone</i> Consultas y WhatsApp: +51 982 716 628</p>
+            </div>
+            <div class="footer-links">
+                <h4>Enlaces Directos</h4>
+                <ul>
+                    <li><a href="#seccion-terrenos">Catálogo de Terrenos</a></li>
+                    <li><a href="#seccion-departamentos">Módulo de Departamentos</a></li>
+                    <li><a href="#seccion-locales">Locales de Comercio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Medrano Firma Inmobiliaria S.A.C. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
